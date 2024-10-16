@@ -11,18 +11,19 @@ jobs:
             npm install --save
 
   build_docker_image:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - checkout  
-      - setup_remote_docker:
-          docker_layer_caching: false
-      - run:
-          name: Build Docker image
-          command: |
-            docker build -t nodejswebapp1 -t jinesh1893/nodejswebapp1:latest .
-            echo $DOCKER_PASSWORD | docker login -u jinesh1893 --password-stdin
-            docker push jinesh1893/nodejswebapp1:latest
+  docker:
+    - image: circleci/node:12
+  steps:
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: false
+    - run:
+        name: Build Docker image
+        command: |
+          docker build -t nodejswebapp1 -t jinesh1893/nodejswebapp1:latest .
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          docker push jinesh1893/nodejswebapp1:latest
+
 
 workflows:
   build_test:
