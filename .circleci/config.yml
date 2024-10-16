@@ -21,7 +21,7 @@ jobs:
         name: Build Docker image
         command: |
           docker build -t nodejswebapp1 -t jinesh1893/nodejswebapp1:latest .
-          echo  Jin@sh973783 | docker login -u jinesh1893/ --password-stdin
+          echo  "$DOCKER_PASSWORD"  docker login -u jinesh1893/ --password-stdin
           docker push jinesh1893/nodejswebapp1:latest
 
 
